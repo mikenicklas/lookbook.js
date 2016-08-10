@@ -13,12 +13,16 @@
     }
   }
 
-  var Lookbook = function($el) {
-    this.createLookbook($el);
+  var Lookbook = function(selector) {
+    for(var i = 0; i < selector.length; i++) {
+      var $el = $(selector[i]);
+      this.createLookbook($el);
+    }
   };
 
   Lookbook.prototype = {
     createLookbook: function ($el) {
+      debugger;
       var image = $el.clone(),
           lbHTML = this._lookbookHTML(image)
        $el.replaceWith(lbHTML);

@@ -53,10 +53,6 @@
         html += arr[i].html;
       }
       return html;
-    },
-
-    _setStyling: function(opts) {
-      $.extend(defaults, opts);
     }
   };
 

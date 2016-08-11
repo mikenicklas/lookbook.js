@@ -1,6 +1,6 @@
-'use strict';
+;(function(global, $) {
+  'use strict';
 
-(function(global, $) {
   var defaults = {
     imagePosition: '100% 0%',
     point: {
@@ -11,7 +11,7 @@
       animationStartColor: 'rgba(255, 255, 255, .5)',
       animationEndColor: 'rgba(0, 0, 0, 0.0)'
     }
-  }
+  };
 
   var Lookbook = function(selector, opts) {
     this.options = $.extend(true, {}, defaults, opts);
@@ -24,13 +24,14 @@
   Lookbook.prototype = {
     createLookbook: function ($el) {
       var image = $el.clone(),
-          lbHTML = this._lookbookHTML(image)
+          lbHTML = this._lookbookHTML(image);
        $el.replaceWith(lbHTML);
        $('.lb-container .focal-point').popover({trigger: 'hover'});
     },
 
     _lookbookHTML: function ($image) {
-      var base = $('<div class="lb-container" style="position: relative"></div>').append($image);
+      var div = '<div class="lb-container" style="position: relative"></div>',
+          base = $(div).append($image);
       return base.append(this._generateFocalPoints($image));
     },
 
@@ -48,7 +49,7 @@
     },
 
     _buildFocalPointHTML: function(arr) {
-      var html = "";
+      var html = '';
       for(var i = 0; i < arr.length; i++) {
         html += arr[i].html;
       }

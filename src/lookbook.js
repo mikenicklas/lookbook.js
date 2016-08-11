@@ -58,7 +58,7 @@
   };
 
   Lookbook.FocalPoint = function(point, options) {
-    var styleRule = this.styleRule,
+    var styleRule = this._styleRule,
         styles = '',
         fullElement = '';
     styles += styleRule('position', 'absolute');
@@ -75,7 +75,7 @@
   };
 
   Lookbook.FocalPoint.prototype = {
-    styleRule: function(attr, val) {
+    _styleRule: function(attr, val) {
       return attr + ':' + val + ';';
     }
   }

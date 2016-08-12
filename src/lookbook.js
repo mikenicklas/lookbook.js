@@ -7,9 +7,11 @@
       height: '30px',
       width: '30px',
       backgroundColor: '#000',
-      borderRadius: '50%',
-      animationStartColor: 'rgba(255, 255, 255, .5)',
-      animationEndColor: 'rgba(0, 0, 0, 0.0)'
+      borderRadius: '50%'},
+    animation: {
+      startColor: 'rgba(255, 255, 255, .5)',
+      endColor: 'rgba(0, 0, 0, 0.0)',
+      duration: '2s'
     }
   };
 
@@ -19,6 +21,7 @@
       var $el = $(selector[i]);
       this.createLookbook($el);
     }
+    this._appendStyles();
   };
 
   Lookbook.prototype = {
@@ -54,6 +57,25 @@
         html += arr[i].html;
       }
       return html;
+    },
+
+    _appendStyles: function() {
+      var styles = this._animationStyleEl(this.options),
+          fullElement = this._styleWrap(styles);
+      $('head').append(fullElement);
+    },
+
+    _animationStyleEl: function(opts) {
+      var base = '.lb-container .focal-point {animation: focalPoint {{duration}} infinite ease-out;}'
+      base += '@keyframes focalPoint {0% {box-shadow: 0px 0px 0px 0px {{animationStartColor}};}'
+      base += '100% {box-shadow: 0px 0px 0px 10px {{animationEndColor}};}}';
+      return base.replace('{{duration}}', opts.animation.duration)
+          .replace('{{animationStartColor}}', opts.animation.startColor)
+          .replace('{{animationEndColor}}', opts.animation.endColor);
+    },
+
+    _styleWrap: function(styleStr) {
+      return '<style class="lb-style">' + styleStr +'</style>'
     }
   };
 

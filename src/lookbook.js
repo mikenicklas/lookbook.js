@@ -3,11 +3,13 @@
 
   var defaults = {
     imagePosition: '100% 0%',
+    'class': 'lb-container',
     point: {
       height: '30px',
       width: '30px',
       backgroundColor: '#000',
-      borderRadius: '50%'},
+      borderRadius: '50%',
+      'class': 'focal-point'},
     animation: {
       startColor: 'rgba(255, 255, 255, .5)',
       endColor: 'rgba(0, 0, 0, 0.0)',
@@ -33,7 +35,7 @@
     },
 
     _lookbookHTML: function ($image) {
-      var div = '<div class="lb-container" style="position: relative"></div>',
+      var div = '<div class="' + this.options['class'] + '" style="position: relative"></div>',
           base = $(div).append($image);
       return base.append(this._generateFocalPoints($image));
     },
@@ -90,7 +92,7 @@
     styles += styleRule('background-color', options.point.backgroundColor);
     styles += styleRule('left', point.posX + 'px');
     styles += styleRule('top', point.posY + 'px');
-    fullElement = '<button type="button" class="btn focal-point" style="';
+    fullElement = '<button type="button" class="btn ' + options.point['class'] + '" style="';
     fullElement += styles + '" title="' + point.title + '" data-toggle="popover" data-content="';
     fullElement += point.description + '" data-placement="top"></button>';
     this.html = fullElement;

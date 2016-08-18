@@ -3,6 +3,7 @@
 
   var defaults = {
     imagePosition: '100% 0%',
+    trigger: 'hover',
     'class': 'lb-container',
     point: {
       height: '30px',
@@ -31,7 +32,7 @@
       var image = $el.clone(),
           lbHTML = this._lookbookHTML(image);
        $el.replaceWith(lbHTML);
-       $('.lb-container .focal-point').popover({trigger: 'hover'});
+       $('.lb-container .focal-point').popover({trigger: this.options.trigger});
     },
 
     _lookbookHTML: function ($image) {

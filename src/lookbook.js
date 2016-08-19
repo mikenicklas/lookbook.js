@@ -27,6 +27,12 @@
     this._appendStyles();
   };
 
+  function getImageDimensions($image) {
+    var dimensions = {height: $image.get(0).naturalHeight,
+                      width: $image.get(0).naturalWidth};
+    return dimensions;
+  }
+
   Lookbook.prototype = {
     createLookbook: function ($el) {
       var image = $el.clone(),
@@ -43,11 +49,11 @@
 
     _generateFocalPoints: function($image) {
       var points = $image.data('lookbook-points'),
+          imageDimensions = getImageDimensions($image),
           pointsArr = [],
           pointsHTML;
-
       for(var i = 0; i < points.length; i++) {
-        var fp = new Lookbook.FocalPoint(points[i], this.options);
+        var fp = new Lookbook.FocalPoint(points[i], this.options, imageDimensions);
         pointsArr.push(fp);
       }
 
@@ -82,17 +88,19 @@
     }
   };
 
-  Lookbook.FocalPoint = function(point, options) {
+  Lookbook.FocalPoint = function(point, options, imageDimensions) {
     var styleRule = this._styleRule,
         styles = '',
         fullElement = '';
+    point.posX = (point.posX / imageDimensions.width) * 100;
+    point.posY = (point.posY / imageDimensions.height) * 100;
     styles += styleRule('position', 'absolute');
     styles += styleRule('height', options.point.height);
     styles += styleRule('width', options.point.width);
     styles += styleRule('border-radius', options.point.borderRadius);
     styles += styleRule('background-color', options.point.backgroundColor);
-    styles += styleRule('left', point.posX + 'px');
-    styles += styleRule('top', point.posY + 'px');
+    styles += styleRule('left', point.posX + '%');
+    styles += styleRule('top', point.posY + '%');
     fullElement = '<button type="button" class="btn ' + options.point['class'] + '" style="';
     fullElement += styles + '" title="' + point.title + '" data-toggle="popover" data-content="';
     fullElement += point.description + '" data-placement="top"></button>';

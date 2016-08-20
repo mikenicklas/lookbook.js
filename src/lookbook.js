@@ -49,7 +49,6 @@
           pointsHTML;
       for(var i = 0; i < points.length; i++) {
         var fp = new Lookbook.FocalPoint(points[i], this.options, lookbook);
-        debugger;
         pointsArr.push(fp);
       }
 
@@ -90,7 +89,6 @@
         fullElement = '';
     point.posX = (point.posX / lookbook.dimensions.width) * 100;
     point.posY = (point.posY / lookbook.dimensions.height) * 100;
-    console.log(point);
     styles += styleRule('position', 'absolute');
     styles += styleRule('height', options.point.height);
     styles += styleRule('width', options.point.width);

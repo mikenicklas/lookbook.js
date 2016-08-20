@@ -27,33 +27,29 @@
     this._appendStyles();
   };
 
-  function getImageDimensions($image) {
-    var dimensions = {height: $image.get(0).naturalHeight,
-                      width: $image.get(0).naturalWidth};
-    return dimensions;
-  }
-
   Lookbook.prototype = {
     createLookbook: function ($el) {
+      this.dimensions = {height: $el.height(), width: $el.width()};
       var image = $el.clone(),
           lbHTML = this._lookbookHTML(image);
-       $el.replaceWith(lbHTML);
-       $('.lb-container .focal-point').popover({trigger: this.options.trigger});
+      $el.replaceWith(lbHTML);
+      $('.lb-container .focal-point').popover({trigger: this.options.trigger});
     },
 
     _lookbookHTML: function ($image) {
-      var div = '<div class="' + this.options['class'] + '" style="position: relative"></div>',
+      var div = '<div class="' + this.options['class'] + '" style="position: relative; display: inline-block;"></div>',
           base = $(div).append($image);
       return base.append(this._generateFocalPoints($image));
     },
 
     _generateFocalPoints: function($image) {
       var points = $image.data('lookbook-points'),
-          imageDimensions = getImageDimensions($image),
+          lookbook = this,
           pointsArr = [],
           pointsHTML;
       for(var i = 0; i < points.length; i++) {
-        var fp = new Lookbook.FocalPoint(points[i], this.options, imageDimensions);
+        var fp = new Lookbook.FocalPoint(points[i], this.options, lookbook);
+        debugger;
         pointsArr.push(fp);
       }
 
@@ -88,12 +84,13 @@
     }
   };
 
-  Lookbook.FocalPoint = function(point, options, imageDimensions) {
+  Lookbook.FocalPoint = function(point, options, lookbook) {
     var styleRule = this._styleRule,
         styles = '',
         fullElement = '';
-    point.posX = (point.posX / imageDimensions.width) * 100;
-    point.posY = (point.posY / imageDimensions.height) * 100;
+    point.posX = (point.posX / lookbook.dimensions.width) * 100;
+    point.posY = (point.posY / lookbook.dimensions.height) * 100;
+    console.log(point);
     styles += styleRule('position', 'absolute');
     styles += styleRule('height', options.point.height);
     styles += styleRule('width', options.point.width);

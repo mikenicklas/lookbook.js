@@ -1,0 +1,10 @@
+{
+  "name": "lookbook.js",
+  "version": "0.0.1",
+  "author": {
+    "name": "Mike Nicklas"
+  },
+  "devDependencies": {
+    "webpack": "1.13.2"
+  }
+}

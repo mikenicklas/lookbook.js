@@ -91,8 +91,7 @@
 	    _generateFocalPoints: function($image) {
 	      var points = $image.data('lookbook-points'),
 	          lookbook = this,
-	          pointsArr = [],
-	          pointsHTML;
+	          pointsArr = [];
 	      for(var i = 0; i < points.length; i++) {
 	        var fp = new Lookbook.FocalPoint(points[i], this.options, lookbook);
 	        pointsArr.push(fp);

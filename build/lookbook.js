@@ -56,6 +56,7 @@
 	      width: '30px',
 	      backgroundColor: '#000',
 	      borderRadius: '50%',
+	      padding: '0',
 	      'class': 'focal-point'},
 	    animation: {
 	      startColor: 'rgba(255, 255, 255, .5)',
@@ -137,6 +138,7 @@
 	    styles += styleRule('position', 'absolute');
 	    styles += styleRule('height', options.point.height);
 	    styles += styleRule('width', options.point.width);
+	    styles += styleRule('padding', options.point.padding);
 	    styles += styleRule('border-radius', options.point.borderRadius);
 	    styles += styleRule('background-color', options.point.backgroundColor);
 	    styles += styleRule('left', point.posX + '%');
